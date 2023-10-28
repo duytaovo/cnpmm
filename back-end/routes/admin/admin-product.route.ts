@@ -36,7 +36,7 @@ adminProductRouter.get(
 )
 
 adminProductRouter.get(
-  '/:product_id',
+  '/detail/:product_id',
   authMiddleware.verifyAccessToken,
   authMiddleware.verifyAdmin,
   helpersMiddleware.idRule('product_id'),
