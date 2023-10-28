@@ -13,17 +13,13 @@ export const updatePurchase = async (req: Request, res: Response) => {
     status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
     _id: _id,
   })
-
   if (purchaseInDb) {
-    const data = await PurchaseModel.findOneAndUpdate(
-      {
-        status: STATUS_PURCHASE.DELIVERED,
-        _id: _id,
-      },
-      {
-        new: true,
-      }
+    const data = await PurchaseModel.findByIdAndUpdate(
+      _id,
+      { status: STATUS_PURCHASE.DELIVERED },
+      { new: true }
     )
+
     const response = {
       message: 'Cập nhật đơn thành công',
       data,

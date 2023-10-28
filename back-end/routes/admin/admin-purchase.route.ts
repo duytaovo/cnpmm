@@ -13,7 +13,7 @@ adminPurchaseRouter.get(
   wrapAsync(adminPurchaseController.getPurchases)
 )
 adminPurchaseRouter.get(
-  '/:_id',
+  '/detail/:_id',
   authMiddleware.verifyAccessToken,
   authMiddleware.verifyAdmin,
   helpersMiddleware.idValidator,
@@ -21,7 +21,7 @@ adminPurchaseRouter.get(
 )
 
 adminPurchaseRouter.put(
-  '/:_id',
+  '/update/:_id',
   authMiddleware.verifyAccessToken,
   authMiddleware.verifyAdmin,
   helpersMiddleware.idValidator,
