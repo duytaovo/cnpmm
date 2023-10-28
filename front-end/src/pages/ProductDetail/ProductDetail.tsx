@@ -34,7 +34,7 @@ export default function ProductDetail() {
     () => (product ? product.images.slice(...currentIndexImages) : []),
     [product, currentIndexImages]
   )
-  const queryConfig: ProductListConfig = { limit: '20', page: '1', category: product?.category._id }
+  const queryConfig: ProductListConfig = { limit: '20', page: '1', category: product?.category?._id }
 
   const { data: productsData } = useQuery({
     queryKey: ['products', queryConfig],
@@ -145,7 +145,7 @@ export default function ProductDetail() {
                 <img
                   src={activeImage}
                   alt={product.name}
-                  className='absolute top-0 left-0 h-full w-full bg-white object-cover'
+                  className='absolute left-0 top-0 h-full w-full bg-white object-cover'
                   ref={imageRef}
                 />
               </div>
@@ -172,7 +172,7 @@ export default function ProductDetail() {
                       <img
                         src={img}
                         alt={product.name}
-                        className='absolute top-0 left-0 h-full w-full cursor-pointer bg-white object-cover'
+                        className='absolute left-0 top-0 h-full w-full cursor-pointer bg-white object-cover'
                       />
                       {isActive && <div className='absolute inset-0 border-2 border-orange' />}
                     </div>
@@ -277,7 +277,7 @@ export default function ProductDetail() {
         <div className='container'>
           <div className=' bg-white p-4 shadow'>
             <div className='rounded bg-gray-50 p-4 text-lg capitalize text-slate-700'>Mô tả sản phẩm</div>
-            <div className='mx-4 mt-12 mb-4 text-sm leading-loose'>
+            <div className='mx-4 mb-4 mt-12 text-sm leading-loose'>
               <div
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(product.description)

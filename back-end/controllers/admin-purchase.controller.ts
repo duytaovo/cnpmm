@@ -141,7 +141,7 @@ export const getPurchases = async (req: Request, res: Response) => {
     })
     .lean()
   purchases = purchases.map((purchase) => {
-    purchase.product = handleImageProduct(cloneDeep(purchase.product))
+    // purchase.product = handleImageProduct(cloneDeep(purchase.product))
     return purchase
   })
   const response = {
@@ -152,9 +152,9 @@ export const getPurchases = async (req: Request, res: Response) => {
 }
 
 export const deletePurchases = async (req: Request, res: Response) => {
-  const purchase_ids = req.body
+  const purchase_ids = req.params
   const deletedData = await PurchaseModel.deleteMany({
-    status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
+    // status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
     _id: { $in: purchase_ids },
   })
   return responseSuccess(res, {

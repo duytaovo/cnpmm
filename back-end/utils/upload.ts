@@ -69,18 +69,22 @@ export const uploadFile = (req: Request, folder = '') => {
 export const uploadManyFile = (req: Request, folder = '') => {
   return new Promise<string[]>((resolve, reject) => {
     const form: any = new IncomingForm({ multiples: true })
+
     form.parse(req, function (error, fields, files) {
+      console.log(files)
       if (error) {
         return reject(error)
       }
       try {
         const { images }: { images: any[] } = files
+        console.log(images)
         const errorEntity: any = {}
         if (!images) {
           errorEntity.image = 'Không tìm thấy images'
-        } else if (images.some((image) => !image.type.includes('image'))) {
-          errorEntity.image = 'image không đúng định dạng'
         }
+        // else if (images.some((image) => !image.type.includes('image'))) {
+        //   errorEntity.image = 'image không đúng định dạng'
+        // }
         if (!isEmpty(errorEntity)) {
           return reject(
             new ErrorHandler(STATUS.UNPROCESSABLE_ENTITY, errorEntity)
@@ -96,8 +100,8 @@ export const uploadManyFile = (req: Request, folder = '') => {
           .catch((err) => {
             reject(err)
           })
-      } catch (err) {
-        reject(err)
+      } catch (error) {
+        reject(error)
       }
     })
   })
