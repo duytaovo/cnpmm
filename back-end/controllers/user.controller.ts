@@ -186,7 +186,6 @@ const updateMe = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
   const user_id = req.params.user_id
-  console.log('user_id' + user_id)
   const userDB = await UserModel.findByIdAndDelete(user_id).lean()
   if (userDB) {
     return responseSuccess(res, { message: 'Xóa thành công' })
