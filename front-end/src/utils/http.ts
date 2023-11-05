@@ -2,26 +2,16 @@ import axios, { AxiosError, type AxiosInstance } from 'axios'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { toast } from 'react-toastify'
 import { AuthResponse, RefreshTokenReponse } from 'src/types/auth.type'
-import {
-  clearLS,
-  getAccessTokenFromLS,
-  getRefreshTokenFromLS,
-  setAccessTokenToLS,
-  setProfileToLS,
-  setRefreshTokenToLS
-} from './auth'
-import config from 'src/constants/config'
-import { URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from 'src/apis/auth.api'
+import { clearLS, getAccessTokenFromLS, getRefreshTokenFromLS, setAccessTokenToLS, setRefreshTokenToLS } from './auth'
+
 import { isAxiosExpiredTokenError, isAxiosUnauthorizedError } from './utils'
 import { ErrorResponse } from 'src/types/utils.type'
+import config from 'src/constants/config'
 
-// Purchase: 1 - 3
-// Me: 2 - 5
-// Refresh Token cho purchase: 3 -  4
-// Gọi lại Purchase: 4 - 6
-// Refresh Token mới cho me: 5 - 6
-// Gọi lại Me: 6
-
+export const URL_LOGIN = 'login'
+export const URL_REGISTER = 'register'
+export const URL_LOGOUT = 'logout'
+export const URL_REFRESH_TOKEN = 'refresh-access-token'
 export class Http {
   instance: AxiosInstance
   private accessToken: string
@@ -42,8 +32,10 @@ export class Http {
     })
     this.instance.interceptors.request.use(
       (config) => {
+        config.headers.authorization = this.accessToken
         if (this.accessToken && config.headers) {
           config.headers.authorization = this.accessToken
+
           return config
         }
         return config
@@ -62,7 +54,6 @@ export class Http {
           this.refreshToken = data.data.refresh_token
           setAccessTokenToLS(this.accessToken)
           setRefreshTokenToLS(this.refreshToken)
-          setProfileToLS(data.data.user)
         } else if (url === URL_LOGOUT) {
           this.accessToken = ''
           this.refreshToken = ''
@@ -78,17 +69,11 @@ export class Http {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data: any | undefined = error.response?.data
           const message = data?.message || error.message
-          toast.error(message)
+          toast.error(message + '🥹')
         }
 
-        // Lỗi Unauthorized (401) có rất nhiều trường hợp
-        // - Token không đúng
-        // - Không truyền token
-        // - Token hết hạn*
-
-        // Nếu là lỗi 401
         if (isAxiosUnauthorizedError<ErrorResponse<{ name: string; message: string }>>(error)) {
-          const config = error.response?.config || {}
+          const config: any = error.response?.config || {}
           const { url } = config
           // Trường hợp Token hết hạn và request đó không phải là của request refresh token
           // thì chúng ta mới tiến hành gọi refresh token
@@ -104,14 +89,12 @@ export class Http {
                 })
             return this.refreshTokenRequest.then((access_token) => {
               // Nghĩa là chúng ta tiếp tục gọi lại request cũ vừa bị lỗi
-              return this.instance({ ...config, headers: { ...config.headers, authorization: access_token } })
+              return this.instance({
+                ...config,
+                headers: { ...config.headers, authorization: access_token }
+              })
             })
           }
-
-          // Còn những trường hợp như token không đúng
-          // không truyền token,
-          // token hết hạn nhưng gọi refresh token bị fail
-          // thì tiến hành xóa local storage và toast message
 
           clearLS()
           this.accessToken = ''
@@ -143,4 +126,5 @@ export class Http {
   }
 }
 const http = new Http().instance
+// export const http_auth = new Http(config.baseUrl).instance;
 export default http
