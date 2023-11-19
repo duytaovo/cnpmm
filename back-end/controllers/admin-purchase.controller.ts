@@ -4,8 +4,6 @@ import { STATUS } from '../constants/status'
 import { ProductModel } from '../database/models/product.model'
 import { PurchaseModel } from '../database/models/purchase.model'
 import { ErrorHandler, responseSuccess } from '../utils/response'
-import { handleImageProduct } from './product.controller'
-import { cloneDeep } from 'lodash'
 
 export const updatePurchase = async (req: Request, res: Response) => {
   const { _id } = req.params
