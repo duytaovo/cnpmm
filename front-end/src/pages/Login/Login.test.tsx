@@ -60,7 +60,7 @@ describe('Login', () => {
     })
     fireEvent.submit(submitButton)
     await waitFor(() => {
-      expect(document.querySelector('title')?.textContent).toBe('Trang chủ | Shopee Clone')
+      expect(document.querySelector('title')?.textContent).toBe('Trang chủ ')
     })
     // console.log(await screen.findByText('Email không đúng định dạng'))
   })

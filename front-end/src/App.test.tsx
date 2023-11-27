@@ -15,14 +15,14 @@ describe('App', () => {
 
     // Verify vào đúng trang chủ
     await waitFor(() => {
-      expect(document.querySelector('title')?.textContent).toBe('Trang chủ | Shopee Clone')
+      expect(document.querySelector('title')?.textContent).toBe('Trang chủ ')
     })
 
     // Verify chuyển sang trang login
     await user.click(screen.getByText(/Đăng nhập/i))
     await waitFor(() => {
       expect(screen.queryByText('Bạn chưa có tài khoản?')).toBeInTheDocument()
-      expect(document.querySelector('title')?.textContent).toBe('Đăng nhập | Shopee Clone')
+      expect(document.querySelector('title')?.textContent).toBe('Đăng nhập ')
     })
   })
 

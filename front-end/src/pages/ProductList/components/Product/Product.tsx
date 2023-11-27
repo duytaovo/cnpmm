@@ -31,13 +31,13 @@ export default function Product({ product }: Props) {
               <span className='text-sm'>{formatCurrency(product.price)}</span>
             </div>
           </div>
-          <div className='mt-3 flex items-center justify-end'>
+          {/* <div className='mt-3 flex items-center justify-end'>
             <ProductRating rating={product.rating} />
             <div className='ml-2 text-sm'>
               <span>{formatNumberToSocialStyle(product.sold)}</span>
               <span className='ml-1'>Đã bán</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>

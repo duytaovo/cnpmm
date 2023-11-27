@@ -2752,7 +2752,7 @@ exports[`ProductDetail > Render UI ProductDetail 1`] = `
               class="lg:col-span-1"
             >
               <div>
-                © 2022 Shopee. Tất cả các quyền được bảo lưu.
+                © 2022 . Tất cả các quyền được bảo lưu.
               </div>
             </div>
             <div
@@ -2767,12 +2767,12 @@ exports[`ProductDetail > Render UI ProductDetail 1`] = `
             class="mt-10 text-center text-sm"
           >
             <div>
-              Công ty TNHH Shopee
+              Công ty TNHH 
             </div>
             <div
               class="mt-6"
             >
-              Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn
+              Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.vn
             </div>
             <div
               class="mt-2"
@@ -2787,7 +2787,7 @@ exports[`ProductDetail > Render UI ProductDetail 1`] = `
             <div
               class="mt-2"
             >
-              © 2015 - Bản quyền thuộc về Công ty TNHH Shopee
+              © 2015 - Bản quyền thuộc về Công ty TNHH 
             </div>
           </div>
         </div>

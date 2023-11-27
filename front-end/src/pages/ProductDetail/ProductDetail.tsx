@@ -198,7 +198,7 @@ export default function ProductDetail() {
             <div className='col-span-7'>
               <h1 className='text-xl font-medium uppercase'>{product.name}</h1>
               <div className='mt-8 flex items-center'>
-                <div className='flex items-center'>
+                {/* <div className='flex items-center'>
                   <span className='mr-1 border-b border-b-orange text-orange'>{product.rating}</span>
                   <ProductRating
                     rating={product.rating}
@@ -210,9 +210,9 @@ export default function ProductDetail() {
                 <div>
                   <span>{formatNumberToSocialStyle(product.sold)}</span>
                   <span className='ml-1 text-gray-500'>Đã bán</span>
-                </div>
+                </div> */}
               </div>
-              <div className='mt-8 flex items-center bg-gray-50 px-5 py-4'>
+              <div className=' flex items-center bg-gray-50 '>
                 <div className='text-gray-500 line-through'>₫{formatCurrency(product.price_before_discount)}</div>
                 <div className='ml-3 text-3xl font-medium text-orange'>₫{formatCurrency(product.price)}</div>
                 <div className='ml-4 rounded-sm bg-orange px-1 py-[2px] text-xs font-semibold uppercase text-white'>
