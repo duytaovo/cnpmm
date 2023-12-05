@@ -21,12 +21,37 @@ adminPurchaseRouter.get(
 )
 
 adminPurchaseRouter.put(
-  '/update/:_id',
+  '/updateGetting/:_id',
   authMiddleware.verifyAccessToken,
   authMiddleware.verifyAdmin,
   helpersMiddleware.idValidator,
   helpersMiddleware.entityValidator,
-  wrapAsync(adminPurchaseController.updatePurchase)
+  wrapAsync(adminPurchaseController.updateGetting)
+)
+adminPurchaseRouter.put(
+  '/updateProgress/:_id',
+  authMiddleware.verifyAccessToken,
+  authMiddleware.verifyAdmin,
+  helpersMiddleware.idValidator,
+  helpersMiddleware.entityValidator,
+  wrapAsync(adminPurchaseController.updateProgress)
+)
+adminPurchaseRouter.put(
+  '/updateDelivered/:_id',
+  authMiddleware.verifyAccessToken,
+  authMiddleware.verifyAdmin,
+  helpersMiddleware.idValidator,
+  helpersMiddleware.entityValidator,
+  wrapAsync(adminPurchaseController.updateDelivered)
+)
+
+adminPurchaseRouter.put(
+  '/updateCancel/:_id',
+  authMiddleware.verifyAccessToken,
+  authMiddleware.verifyAdmin,
+  helpersMiddleware.idValidator,
+  helpersMiddleware.entityValidator,
+  wrapAsync(adminPurchaseController.updateCancel)
 )
 
 adminPurchaseRouter.delete(

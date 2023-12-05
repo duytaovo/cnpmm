@@ -10,7 +10,7 @@ import {
   handleImageProductDetail,
 } from './product.controller'
 
-export const updatePurchase = async (req: Request, res: Response) => {
+export const updateGetting = async (req: Request, res: Response) => {
   const { _id } = req.params
   const purchaseInDb: any = await PurchaseModel.findOne({
     status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
@@ -19,7 +19,76 @@ export const updatePurchase = async (req: Request, res: Response) => {
   if (purchaseInDb) {
     const data = await PurchaseModel.findByIdAndUpdate(
       _id,
+      { status: STATUS_PURCHASE.WAIT_FOR_GETTING },
+      { new: true }
+    )
+
+    const response = {
+      message: 'Cập nhật đơn thành công',
+      data,
+    }
+    return responseSuccess(res, response)
+  } else {
+    throw new ErrorHandler(STATUS.NOT_FOUND, 'Không tìm thấy đơn')
+  }
+}
+
+export const updateProgress = async (req: Request, res: Response) => {
+  const { _id } = req.params
+  const purchaseInDb: any = await PurchaseModel.findOne({
+    status: STATUS_PURCHASE.WAIT_FOR_GETTING,
+    _id: _id,
+  })
+  if (purchaseInDb) {
+    const data = await PurchaseModel.findByIdAndUpdate(
+      _id,
+      { status: STATUS_PURCHASE.IN_PROGRESS },
+      { new: true }
+    )
+
+    const response = {
+      message: 'Cập nhật đơn thành công',
+      data,
+    }
+    return responseSuccess(res, response)
+  } else {
+    throw new ErrorHandler(STATUS.NOT_FOUND, 'Không tìm thấy đơn')
+  }
+}
+
+export const updateDelivered = async (req: Request, res: Response) => {
+  const { _id } = req.params
+  const purchaseInDb: any = await PurchaseModel.findOne({
+    status: STATUS_PURCHASE.IN_PROGRESS,
+    _id: _id,
+  })
+  if (purchaseInDb) {
+    const data = await PurchaseModel.findByIdAndUpdate(
+      _id,
       { status: STATUS_PURCHASE.DELIVERED },
+      { new: true }
+    )
+
+    const response = {
+      message: 'Cập nhật đơn thành công',
+      data,
+    }
+    return responseSuccess(res, response)
+  } else {
+    throw new ErrorHandler(STATUS.NOT_FOUND, 'Không tìm thấy đơn')
+  }
+}
+
+export const updateCancel = async (req: Request, res: Response) => {
+  const { _id } = req.params
+  const purchaseInDb: any = await PurchaseModel.findOne({
+    status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
+    _id: _id,
+  })
+  if (purchaseInDb) {
+    const data = await PurchaseModel.findByIdAndUpdate(
+      _id,
+      { status: STATUS_PURCHASE.CANCELLED },
       { new: true }
     )
 
@@ -174,9 +243,13 @@ export const deletePurchases = async (req: Request, res: Response) => {
 
 const adminPurchaseController = {
   deletePurchases,
-  updatePurchase,
   getPurchases,
   getPurchaseDetail,
+  updateGetting,
+  updateProgress,
+  updateDelivered,
+  updateCancel,
+  buyProducts,
 }
 
 export default adminPurchaseController
