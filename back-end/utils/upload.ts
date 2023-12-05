@@ -71,13 +71,11 @@ export const uploadManyFile = (req: Request, folder = '') => {
     const form: any = new IncomingForm({ multiples: true })
 
     form.parse(req, function (error, fields, files) {
-      console.log(files)
       if (error) {
         return reject(error)
       }
       try {
         const { images }: { images: any[] } = files
-        console.log(images)
         const errorEntity: any = {}
         if (!images) {
           errorEntity.image = 'Không tìm thấy images'

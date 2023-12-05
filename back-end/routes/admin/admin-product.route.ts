@@ -52,7 +52,7 @@ adminProductRouter.post(
   wrapAsync(ProductController.addProduct)
 )
 adminProductRouter.put(
-  '/:product_id',
+  '/update/:product_id',
   authMiddleware.verifyAccessToken,
   authMiddleware.verifyAdmin,
   helpersMiddleware.idRule('product_id'),

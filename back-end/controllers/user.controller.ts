@@ -96,7 +96,6 @@ const getUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   const form: User = req.body
-  console.log('first' + form)
   const { password, address, date_of_birth, name, phone, roles, avatar } = form
   const user = omitBy(
     {
