@@ -23,6 +23,14 @@ export const handleImageProduct = (product) => {
   return product
 }
 
+export const handleImageProductDetail = (product) => {
+  if (product !== undefined && product !== '') {
+    product = HOST + `/${ROUTE_IMAGE}/` + product
+  }
+
+  return product
+}
+
 const removeImageProduct = (image) => {
   if (image !== undefined && image !== '') {
     fs.unlink(`${FOLDER_UPLOAD}/${FOLDERS.PRODUCT}/${image}`, (err) => {

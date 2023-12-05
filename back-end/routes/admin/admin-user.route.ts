@@ -30,6 +30,13 @@ adminUserRouter.put(
   helpersMiddleware.entityValidator,
   wrapAsync(userController.updateUser)
 )
+
+adminUserRouter.post(
+  '/upload-avatar',
+  authMiddleware.verifyAccessToken,
+  wrapAsync(userController.uploadAvatar)
+)
+
 adminUserRouter.get(
   '/detail/:user_id',
   authMiddleware.verifyAccessToken,

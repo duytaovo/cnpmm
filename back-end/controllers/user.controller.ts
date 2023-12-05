@@ -99,7 +99,7 @@ const updateUser = async (req: Request, res: Response) => {
   const { password, address, date_of_birth, name, phone, roles, avatar } = form
   const user = omitBy(
     {
-      password,
+      // password,
       address,
       date_of_birth,
       name,

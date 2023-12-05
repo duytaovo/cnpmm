@@ -4,6 +4,11 @@ import { STATUS } from '../constants/status'
 import { ProductModel } from '../database/models/product.model'
 import { PurchaseModel } from '../database/models/purchase.model'
 import { ErrorHandler, responseSuccess } from '../utils/response'
+import { cloneDeep } from 'lodash'
+import {
+  handleImageProduct,
+  handleImageProductDetail,
+} from './product.controller'
 
 export const updatePurchase = async (req: Request, res: Response) => {
   const { _id } = req.params
@@ -30,8 +35,8 @@ export const updatePurchase = async (req: Request, res: Response) => {
 
 export const getPurchaseDetail = async (req: Request, res: Response) => {
   const { _id } = req.params
-  const purchaseInDb: any = await PurchaseModel.findOne({
-    status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
+  let purchaseInDb: any = await PurchaseModel.findOne({
+    // status: STATUS_PURCHASE.WAIT_FOR_CONFIRMATION,
     _id,
   })
     .populate({
@@ -41,10 +46,16 @@ export const getPurchaseDetail = async (req: Request, res: Response) => {
       },
     })
     .lean()
+  let images = purchaseInDb?.product?.images?.map((item) => {
+    item = handleImageProductDetail(cloneDeep(item))
+    return item
+  })
+
   if (purchaseInDb) {
     const response = {
       message: 'Lấy đơn thành công',
       purchaseInDb,
+      images,
     }
     return responseSuccess(res, response)
   } else {
@@ -139,7 +150,7 @@ export const getPurchases = async (req: Request, res: Response) => {
     })
     .lean()
   purchases = purchases.map((purchase) => {
-    // purchase.product = handleImageProduct(cloneDeep(purchase.product))
+    purchase.product = handleImageProduct(cloneDeep(purchase.product))
     return purchase
   })
   const response = {
