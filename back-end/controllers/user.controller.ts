@@ -169,6 +169,7 @@ const updateMe = async (req: Request, res: Response) => {
       })
     }
   }
+
   const updatedUserDB = await UserModel.findByIdAndUpdate(
     req.jwtDecoded.id,
     user,
