@@ -7,7 +7,7 @@ import chalk from 'chalk'
 
 //require database URL from properties file
 // const dbURL = `mongodb+srv://voduytao:Duytao0352811529_@@@cluster0.wx92vof.mongodb.net/?retryWrites=true&w=majority`
-const dbURL = `mongodb://localhost:27017`
+const dbURL = `mongodb://127.0.0.1:27017`
 const connected = chalk.bold.cyan
 const error = chalk.bold.yellow
 const disconnected = chalk.bold.red

@@ -2,7 +2,7 @@ import { Router } from 'express'
 import helpersMiddleware from '../../middleware/helpers.middleware'
 import authMiddleware from '../../middleware/auth.middleware'
 import { wrapAsync } from '../../utils/response'
-import adminPurchaseController from '../../controllers/admin-purchase.controller'
+import adminPurchaseController from '../../controllers/admin/purchase.controller'
 
 const adminPurchaseRouter = Router()
 adminPurchaseRouter.get(

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import helpersMiddleware from '../../middleware/helpers.middleware'
 import authMiddleware from '../../middleware/auth.middleware'
-import categoryController from '../../controllers/category.controller'
+import categoryController from '../../controllers/admin/category.controller'
 import categoryMiddleware from '../../middleware/category.middleware'
 import { wrapAsync } from '../../utils/response'
 
