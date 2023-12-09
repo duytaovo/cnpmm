@@ -30,9 +30,9 @@ export default function ChangePassword() {
   })
   const updateProfileMutation = useMutation(userApi.updateProfile)
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: any) => {
     try {
-      const res = await updateProfileMutation.mutateAsync(omit(data, ['confirm_password']))
+      const res = await updateProfileMutation.mutateAsync(data)
       toast.success(res.data.message)
       reset()
     } catch (error) {
@@ -41,8 +41,8 @@ export default function ChangePassword() {
         if (formError) {
           Object.keys(formError).forEach((key) => {
             setError(key as keyof FormData, {
-              message: formError[key as keyof FormData],
-              type: 'Server'
+              // message: formError[key as keyof FormData],
+              // type: 'Server'
             })
           })
         }
@@ -56,7 +56,7 @@ export default function ChangePassword() {
         <h1 className='text-lg font-medium capitalize text-gray-900'>Đổi mật khẩu</h1>
         <div className='mt-1 text-sm text-gray-700'>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
       </div>
-      <form className='mt-8 mr-auto max-w-2xl' onSubmit={onSubmit}>
+      <form className='mr-auto mt-8 max-w-2xl' onSubmit={onSubmit}>
         <div className='mt-6 flex-grow md:mt-0 md:pr-12'>
           <div className='mt-2 flex flex-col flex-wrap sm:flex-row'>
             <div className='truncate pt-3 capitalize sm:w-[20%] sm:text-right'>Mật khẩu cũ</div>

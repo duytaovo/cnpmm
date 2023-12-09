@@ -7,7 +7,7 @@ import RegisterLayout from './layouts/RegisterLayout'
 
 import CartLayout from './layouts/CartLayout'
 import UserLayout from './pages/User/layouts/UserLayout'
-
+import Policy from './pages/Policy'
 
 const Login = lazy(() => import('./pages/Login'))
 const ProductList = lazy(() => import('./pages/ProductList'))
@@ -18,8 +18,6 @@ const Cart = lazy(() => import('./pages/Cart'))
 const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
 const HistoryPurchase = lazy(() => import('./pages/User/pages/HistoryPurchase'))
 const NotFound = lazy(() => import('./pages/NotFound'))
-
-
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -132,6 +130,15 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <ProductList />
+            </Suspense>
+          )
+        },
+        {
+          path: '/policy',
+          index: true,
+          element: (
+            <Suspense>
+              <Policy />
             </Suspense>
           )
         },
